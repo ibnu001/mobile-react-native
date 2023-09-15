@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
-import { Image, Text, View, TouchableOpacity } from 'react-native'
-import { tokonyadiaStyles } from './TokonyadiaScreen.style'
-import { onNavigate } from '../../navigation/RootNavigation'
-import PATH from '../../navigation/NavigationPath'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { useDispatch } from 'react-redux'
+import PATH from '../../navigation/NavigationPath'
+import { onNavigate } from '../../navigation/RootNavigation'
 import setProducts from '../../store/Product/ProductAction'
-import ProductList from './components/ProductList'
 import LocalStorage from '../../utils/LocalStorage'
+import { tokonyadiaStyles } from './TokonyadiaScreen.style'
+import ProductList from './components/ProductList'
 
 export default function TokonyadiaScreen({ product }) {
 

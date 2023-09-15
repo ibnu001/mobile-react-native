@@ -2,12 +2,16 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { IconButton } from '@react-native-material/core';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { onNavigate } from "../../../navigation/RootNavigation";
-import LocalStorage from "../../../utils/LocalStorage";
+import { useDispatch } from "react-redux";
 import PATH from '../../../navigation/NavigationPath';
+import { onNavigate } from "../../../navigation/RootNavigation";
+import setCarts from "../../../store/cart/CartAction";
+import LocalStorage from "../../../utils/LocalStorage";
 import productStyle from './Product.style';
 
 export default function Product({ product, createTransactionProps }) {
+
+    const dispatch = useDispatch()
 
     const formatPrice = new Intl.NumberFormat('id-ID', {
         style: 'currency',
@@ -20,20 +24,20 @@ export default function Product({ product, createTransactionProps }) {
         try {
             const token = await LocalStorage().getData('token');
             const customerId = await LocalStorage().getData('customerId');
-            const uniqeData = {token: token, customerId: customerId}
+            const uniqeData = { token: token, customerId: customerId }
             return uniqeData
         } catch (error) {
             console.error('Error:', error);
             throw error;
         }
     };
-    
+
     const onNewTransaction = async () => {
         try {
             const uniqeData = await fetchToken();
             console.log('Token:', uniqeData.token);
             console.log('customerId: ', uniqeData.customerId);
-            
+
             if (!uniqeData.token) {
                 onNavigate({
                     routeName: PATH.LOGIN,
@@ -57,6 +61,9 @@ export default function Product({ product, createTransactionProps }) {
         }
     }
 
+    const onCart = (product) => {
+        dispatch(setCarts(product))
+    }
 
     return (
         <View style={productStyle.container}>
@@ -98,7 +105,7 @@ export default function Product({ product, createTransactionProps }) {
                         icon={props => <Icon name="cart" {...props} />}
                         color='#f56b00'
                         style={{ borderRadius: 8, borderWidth: 1, borderColor: '#f56b00' }}
-                    // onPress={}
+                        onPress={onCart(product)}
                     />
                 </View>
             </View>

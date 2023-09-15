@@ -5,6 +5,7 @@ const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
 const SHOW_ERROR = 'SHOW_ERROR'
 const SET_PRODUCTS = 'SET_PRODUCTS'
+const SET_CARTS = 'SET_CARTS'
 
 export {
     SHOW_LOADING,
@@ -14,4 +15,5 @@ export {
     LOGOUT,
     SHOW_ERROR,
     SET_PRODUCTS,
+    SET_CARTS,
 }
